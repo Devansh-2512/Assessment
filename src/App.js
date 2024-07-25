@@ -6,17 +6,19 @@ function App() {
   const [inputDelimeter, setInputDelimeter] = useState("");
   const [resultString, setResultString] = useState("");
 
-  
+  const removeNextLines = () => {
+    let str = inputString;
+    let newStr = str.replace(/[\r\n]+/gm, inputDelimeter);
+    return newStr;
+  };
   const add = () => {
-    let newString = inputString;
-    console.log(newString, "newString");
+    let newString = removeNextLines();
     if (newString.length == 0) {
       setResultString("0");
     } else if (inputDelimeter.length == 0) {
       setResultString(newString);
     } else {
       let arrayOfNums = newString.split(inputDelimeter);
-      console.log(arrayOfNums, "arrayOfNums", inputDelimeter);
       if (!newString.includes(inputDelimeter)) {
         setResultString("Invalid Delimeter");
       } else {
