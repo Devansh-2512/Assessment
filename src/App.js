@@ -15,8 +15,6 @@ function App() {
     let newString = removeNextLines();
     if (newString.length == 0) {
       setResultString("0");
-    } else if (inputDelimeter.length == 0) {
-      setResultString(newString);
     } else {
       let arrayOfNums = newString.split(inputDelimeter);
       if (!newString.includes(inputDelimeter)) {
@@ -63,7 +61,15 @@ function App() {
           <Button
             type="primary"
             onClick={() => {
-              add();
+              if (inputDelimeter.length === 0 && !Number(inputString)) {
+                setResultString("Delimeter Missing");
+                return;
+              } else if (inputDelimeter.length === 0 && Number(inputString)) {
+                setResultString(inputString);
+              } else {
+                add();
+              }
+              // debugger;
             }}
           >
             Calculate
